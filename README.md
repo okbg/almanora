@@ -1,11 +1,10 @@
 # almanora
 
-Docker tools for Node.js apps
+Docker made easy for Node.js
 
 ## Getting started
 
 ```sh
-npm install almanora
 npx almanora run
 ```
 
