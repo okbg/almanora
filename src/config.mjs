@@ -1,6 +1,7 @@
 import { getAlmaNoraConfig, getPackageJson } from "./utils/files.mjs";
 import process from "process";
 import * as nextjs from "./utils/nextjs.mjs";
+import almanoraConfig from "../tests/manual/nextjs/almanora.config.mjs";
 
 /**
  * @typedef {object} Config
@@ -8,6 +9,7 @@ import * as nextjs from "./utils/nextjs.mjs";
  * @property {string} projectVersion Project version
  * @property {string} nodeVersion Node version
  * @property {"nextjs"} framework Framework used
+ * @property {boolean?} updateDockerfileOnRun Whether to auto update Dockerfile on run
  */
 export const Config = {};
 
@@ -66,6 +68,18 @@ async function getNodeMajorVersion() {
 }
 
 /**
+ * @async
+ * @returns {Promise<boolean>} Should we update Dockerfile on run?
+ */
+async function getUpdateDockerfileOnRun() {
+  const almaNoraConfig = await getAlmaNoraConfig();
+  if (!almaNoraConfig.updateDockerfileOnRun) {
+    return false;
+  }
+  return true;
+}
+
+/**
  *
  * @param {Config} config Config to use
  */
@@ -92,12 +106,14 @@ export async function getConfig() {
   const projectVersion = await getProjectVersion();
   const nodeMajorVersion = await getNodeMajorVersion();
   const framework = await getFramework();
+  const updateDockerfileOnRun = await getUpdateDockerfileOnRun();
 
   const config = {
     projectName: projectName || "default-almanora-runner",
     projectVersion: projectVersion || "0.0.1",
     nodeVersion: nodeMajorVersion,
     framework,
+    updateDockerfileOnRun,
   };
 
   assertConfigSupported(config);

@@ -10,7 +10,10 @@ import { renderDockerfile } from "./templating.mjs";
  * @param {Config} config Config to use
  * @returns {Promise<void>} Resolves when dockerfile has been successfully updated
  */
-async function updateDockerfile(config) {
+export async function updateDockerfile(config) {
+  if (!config.updateDockerfileOnRun) {
+    return;
+  }
   const dockerfile = await renderDockerfile(config);
   const outputPath = path.join(process.cwd(), "Dockerfile");
   await writeFile(outputPath, dockerfile, { encoding: "utf-8" });
@@ -42,7 +45,6 @@ function spawnDocker(args) {
  * @returns {Promise<void>} Resolved on build succeed
  */
 export async function build(config) {
-  await updateDockerfile(config);
   await spawnDocker([
     "build",
     "-t",

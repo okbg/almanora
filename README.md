@@ -21,6 +21,7 @@ export default {
   projectVersion: "1.2.3",
   framework: "nextjs",
   nodeVersion: "21",
+  updateDockerfileOnRun: true,
 };
 ```
 
