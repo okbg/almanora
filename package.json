@@ -1,5 +1,5 @@
 {
-  "name": "node-docker-tools",
+  "name": "almanora",
   "version": "0.0.1",
   "description": "Docker tools for Node.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okbg/node-docker-tools.git"
+    "url": "git+https://github.com/okbg/almanora.git"
   },
   "keywords": [
     "node",
@@ -28,9 +28,9 @@
   "author": "Olof Kihlberg <kihlberg.olof@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okbg/node-docker-tools/issues"
+    "url": "https://github.com/okbg/almanora/issues"
   },
-  "homepage": "https://github.com/okbg/node-docker-tools#readme",
+  "homepage": "https://github.com/okbg/almanora#readme",
   "devDependencies": {
     "@eslint/js": "9.2.0",
     "eslint": "9.2.0",

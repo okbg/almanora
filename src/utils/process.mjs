@@ -1,7 +1,7 @@
 import { argv } from "process";
 
 /**
- * Get a command line argument by name
+ * Assumes args are passed like --name value
  * @param {string} name Name of the argument, including dashes
  * @param {string} defaultValue Default value if not found
  * @returns {string} The value

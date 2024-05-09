@@ -1,10 +1,23 @@
-# node-docker-tools
+# almanora
 
-Docker tools for Node.js that simplifies generating Dockerfiles, building images and running containers locally.
+Docker tools for Node.js apps
+
+## Getting started
+
+```sh
+npm install almanora
+npx almanora run
+```
 
 ## Supported frameworks
 
-- [x] Next.js, with [output mode set to "standalone"](https://github.com/vercel/next.js/blob/canary/examples/with-docker/next.config.js)
+These tools are tested to work with the following frameworks :
+
+- [x] Next.js v13
+
+## Supported versions of Node
+
+- [x] Node version 22.1.0
 
 ## Roadmap
 
@@ -13,24 +26,14 @@ Docker tools for Node.js that simplifies generating Dockerfiles, building images
 - [ ] Add support for reverse proxying using nginx
 - [ ] Publish npm package
 
-## Usage
-
-### Commands
-
-```sh
-npx node-docker-tools generate    # Generate a Dockerfile
-npx node-docker-tools build       # Build the image
-npx node-docker-tools run         # Run the container
-```
-
 ### Config
 
-Default config location is `node-docker-tools.config.mjs` in the root of your project. For non default location use `--config path/to/config.mjs`.
+Default config location is `almanora.config.mjs` in the root of your project. For non default location use `--config path/to/config.mjs`.
 
 #### Example
 
 ```js
-import { Config } from "node-docker-tools";
+import { Config } from "almanora/config.mjs";
 
 /** @type {Config} */
 export default {

@@ -1,11 +1,7 @@
-#
-# Based on: https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
-#
-
-FROM node:18-alpine AS base
+FROM node:22-alpine AS base
 
 #
-# Dependencies image
+# Dependencies
 #
 
 FROM base AS deps
@@ -21,7 +17,7 @@ RUN \
   fi
 
 #
-# Build image
+# Build
 #
 
 FROM base AS builder
@@ -39,7 +35,7 @@ RUN \
   fi
 
 #
-# Runtime image
+# Runtime
 #
 
 FROM base AS runner

@@ -1,12 +1,11 @@
 #
-# Based on: https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
+# NB: This file is managed by almanora. Changes made will be overridden when app is started.
 #
 
-# TODO: Use node version from config
-FROM node:18-alpine AS base
+FROM node:{{nodeVersion}}-alpine AS base
 
 #
-# Dependencies image
+# Dependencies
 #
 
 FROM base AS deps
@@ -22,7 +21,7 @@ RUN \
   fi
 
 #
-# Build image
+# Build
 #
 
 FROM base AS builder
@@ -40,7 +39,7 @@ RUN \
   fi
 
 #
-# Runtime image
+# Runtime
 #
 
 FROM base AS runner
