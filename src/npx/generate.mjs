@@ -4,11 +4,11 @@ import process from "process";
 import path from "path";
 import { writeFile } from "fs/promises";
 
-import { getConfig } from "../config.mjs";
+import { resolveConfig } from "../config.mjs";
 import { argOrDefault } from "../utils/process.mjs";
 import { renderTemplate } from "../utils/templating.mjs";
 
-const config = await getConfig();
+const config = await resolveConfig();
 
 const dockerfile = await (async () => {
   switch (config.framework) {

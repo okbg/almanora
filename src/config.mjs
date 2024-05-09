@@ -5,8 +5,9 @@ import { argOrDefault } from "./utils/process.mjs";
 
 /**
  * @typedef {object} Config
- * @property {"nextjs"|undefined} framework Framework used, if any
+ * @property {string} imageName Name of the image to create
  * @property {string=} nodeVersion Version of Node.js to use
+ * @property {"nextjs"|undefined} framework Framework used, if any
  */
 export const Config = {};
 
@@ -17,37 +18,27 @@ export const Config = {};
  */
 const DEFAULT_CONFIG = {
   nodeVersion: "2022.1.0",
-  type: "",
 };
 
 /**
- * Import user defined overrides
+ * Resolve the configuration by applying the user defined configuration
+ * on top of the default one
  * @async
- * @returns {Promise<Config|null>} The user defined overrides, or null
+ * @returns {Promise<Config>} The resolved config
  */
-async function getOverrides() {
+export async function resolveConfig() {
   const path = argOrDefault(
     "--config",
     join(cwd(), "node-docker-tools.config.mjs")
   );
   try {
     const module = await import(path);
-    return module.default;
+    return { ...DEFAULT_CONFIG, ...module.default };
   } catch (e) {
     if (e.code === "ERR_MODULE_NOT_FOUND") {
-      console.warn(`WARNING: No valid config found at ${path}`);
-      return Promise.resolve(null);
+      throw Error(`WARNING: No valid config found at ${path}`);
+    } else {
+      throw e;
     }
-    throw e;
   }
-}
-
-/**
- * Get the final config, that is default config with user defined overrides applied
- * @async
- * @returns {Promise<Config>} The config
- */
-export async function getConfig() {
-  const overrides = await getOverrides();
-  return { ...DEFAULT_CONFIG, ...(overrides || {}) };
 }
