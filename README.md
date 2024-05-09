@@ -1,22 +1,36 @@
 # almanora
 
-Docker made easy for Node.js
+Docker made easy
 
-## Getting started
+## Running
 
 ```sh
 npx almanora run
 ```
 
+### Config
+
+Config should be located at `almanora.config.mjs`
+
+```js
+import { Config } from "almanora/config.mjs";
+
+/** @type {Config} */
+export default {
+  projectName: "myapp",
+  projectVersion: "1.2.3",
+  framework: "nextjs",
+  nodeVersion: "21",
+};
+```
+
 ## Supported frameworks
 
-These tools are tested to work with the following frameworks :
+- [x] Next.js v14
 
-- [x] Next.js v13
+## Supported node versions
 
-## Supported versions of Node
-
-- [x] Node version 22.1.0
+- [x] 22.1.0
 
 ## Roadmap
 
@@ -25,25 +39,9 @@ These tools are tested to work with the following frameworks :
 - [ ] Add support for reverse proxying using nginx
 - [ ] Publish npm package
 
-### Config
-
-Default config location is `almanora.config.mjs` in the root of your project. For non default location use `--config path/to/config.mjs`.
-
-#### Example
-
-```js
-import { Config } from "almanora/config.mjs";
-
-/** @type {Config} */
-export default {
-  imageName: "myapp",
-  framework: "nextjs",
-};
-```
-
 ## Contribute
 
-Door is always open for pull requests
+Out door is always open for pull requests
 
 ### Linting
 
@@ -71,5 +69,5 @@ To test a local version of an npx scripts within the context of an example app y
 
 ```sh
 cd tests/manual/nextjs
-node ../../../src/npx/generate.mjs
+node ../../../src/npx/run.mjs
 ```

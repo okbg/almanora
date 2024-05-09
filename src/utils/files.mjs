@@ -1,5 +1,6 @@
 import path from "path";
 import { readFile } from "fs/promises";
+import { Config } from "../config.mjs";
 
 /**
  * @async
@@ -34,4 +35,22 @@ export async function getNextConfig() {
   }
 
   return undefined;
+}
+
+/**
+ * @async
+ * @returns {Promise<Config|undefined>} almanora.config.js as an object
+ */
+export async function getAlmaNoraConfig() {
+  let module;
+  try {
+    module = await import(path.join(process.cwd(), "almanora.config.mjs"));
+  } catch (e) {
+    if (e.code === "ERR_MODULE_NOT_FOUND") {
+      // No config file found
+    } else {
+      throw e;
+    }
+  }
+  return module.default || {};
 }

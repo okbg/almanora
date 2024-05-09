@@ -1,4 +1,4 @@
-import { getPackageJson } from "./utils/files.mjs";
+import { getAlmaNoraConfig, getPackageJson } from "./utils/files.mjs";
 import process from "process";
 import * as nextjs from "./utils/nextjs.mjs";
 
@@ -13,12 +13,18 @@ export const Config = {};
 
 /**
  * @async
- * @returns {Promise<string|undefined>} Supported framework found, if any
+ * @returns {Promise<string|undefined>} Framework found, if any
  */
 async function getFramework() {
+  const almaNoraConfig = await getAlmaNoraConfig();
+  if (almaNoraConfig.framework) {
+    return almaNoraConfig.framework;
+  }
+
   if (await nextjs.isDependency()) {
     return "nextjs";
   }
+
   return undefined;
 }
 
@@ -26,9 +32,10 @@ async function getFramework() {
  * @async
  * @returns {Promise<string|undefined>} Package name, if any
  */
-async function getPackageName() {
+async function getProjectName() {
+  const almaNoraConfig = await getAlmaNoraConfig();
   const packageJson = await getPackageJson();
-  return packageJson.name;
+  return almaNoraConfig.projectName || packageJson.name;
 }
 
 /**
@@ -36,22 +43,26 @@ async function getPackageName() {
  * @returns {Promise<string|undefined>} Project version, if any
  */
 async function getProjectVersion() {
+  const almaNoraConfig = await getAlmaNoraConfig();
   const packageJson = await getPackageJson();
-  return packageJson.version;
+  return almaNoraConfig.projectVersion || packageJson.version;
 }
 
 /**
- * @returns {string} Node version
+ * @async
+ * @returns {Promise<string>} Node version
  */
-function getNodeVersion() {
-  return process.versions.node;
+async function getNodeVersion() {
+  const almaNoraConfig = await getAlmaNoraConfig();
+  return almaNoraConfig.nodeVersion || process.versions.node;
 }
 
 /**
- * @returns {number} Node major version
+ * @async
+ * @returns {Promise<number>} Node major version
  */
-function getNodeMajorVersion() {
-  return getNodeVersion().split(".")[0];
+async function getNodeMajorVersion() {
+  return (await getNodeVersion()).split(".")[0];
 }
 
 /**
@@ -77,16 +88,16 @@ function assertConfigSupported(config) {
  * @returns {Promise<Config>} The resolved config
  */
 export async function getConfig() {
-  const framework = await getFramework();
-  const projectName = await getPackageName();
+  const projectName = await getProjectName();
   const projectVersion = await getProjectVersion();
-  const nodeMajorVersion = getNodeMajorVersion();
+  const nodeMajorVersion = await getNodeMajorVersion();
+  const framework = await getFramework();
 
   const config = {
     projectName: projectName || "default-almanora-runner",
     projectVersion: projectVersion || "0.0.1",
-    framework,
     nodeVersion: nodeMajorVersion,
+    framework,
   };
 
   assertConfigSupported(config);

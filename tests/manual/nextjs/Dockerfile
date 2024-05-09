@@ -1,4 +1,8 @@
-FROM node:22-alpine AS base
+#
+# NB: This file is managed by almanora. Changes made will be overridden when app is started.
+#
+
+FROM node:18-alpine AS base
 
 #
 # Dependencies
