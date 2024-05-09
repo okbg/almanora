@@ -13,7 +13,7 @@
     "run": "./src/npx/run.mjs"
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint --max-warnings=0",
     "test": "node --test"
   },
   "repository": {

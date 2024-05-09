@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
  * @param {object} context Rendering context to pass to template
  * @returns {Promise<string>} Output of the rendering
  */
-export async function renderTemplate(name, content) {
+export async function renderTemplate(name, context) {
   const url = fileURLToPath(import.meta.url);
   const templatePath = path.join(
     path.dirname(url),
@@ -19,5 +19,5 @@ export async function renderTemplate(name, content) {
     name
   );
   const template = await readFile(templatePath, { encoding: "utf-8" });
-  return mustache.render(template, content);
+  return mustache.render(template, context);
 }
