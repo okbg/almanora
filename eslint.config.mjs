@@ -10,7 +10,7 @@ import jsdoc from "eslint-plugin-jsdoc";
 // ]
 
 export default [
-  { ignores: ["tests/manual/*"] },
+  { ignores: ["examples/*"] },
   pluginJs.configs.recommended,
   jsdoc.configs["flat/recommended"],
   {

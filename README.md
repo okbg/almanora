@@ -57,19 +57,12 @@ npm run lint
 
 ### Tests
 
-#### Unit
-
-Unit tests are run with [Node.js test runner](https://nodejs.org/api/test.html)
+Tests are run with [Node.js test runner](https://nodejs.org/api/test.html)
 
 ```
 npm run test
 ```
 
-#### Manual
+### Examples
 
-Example projects useful for testing things manually can be found under [/tests/manual](tests/manual/)
-
-```sh
-cd tests/manual/nextjs
-node ../../../src/npx/run.mjs
-```
+Example projects can be found under [/examples](examples/)
