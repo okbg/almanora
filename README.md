@@ -2,6 +2,12 @@
 
 Docker tools for Node.js that simplifies generating Dockerfiles, building images and running containers locally.
 
+## Supported frameworks
+
+- [ ] Express
+- [x] Next.js v14
+- [ ] Remix
+
 ## Usage
 
 ### Commands
