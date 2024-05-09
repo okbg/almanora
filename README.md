@@ -18,7 +18,7 @@ Docker made easy
 npx almanora run
 ```
 
-### Config
+## Config
 
 Should be located at `almanora.config.mjs`
 
