@@ -1,6 +1,6 @@
-# almanora
+# anora
 
-Docker made easy
+Hosting made easy
 
 ## Supported environments
 
@@ -15,15 +15,15 @@ Docker made easy
 ## Running
 
 ```sh
-npx almanora run
+npx anora run
 ```
 
 ## Config
 
-Should be located at `almanora.config.mjs`
+Create `anora.config.mjs` in the root of your project
 
 ```js
-import { Config } from "almanora/config.mjs";
+import { Config } from "anora/config.mjs";
 
 /** @type {Config} */
 export default {
@@ -40,6 +40,7 @@ export default {
 - [ ] Add support for reverse proxying using nginx
 - [ ] Add support for express
 - [ ] Add support for Remix
+- [ ] Add support for deploying
 - [ ] Publish npm package
 
 ## Contribute

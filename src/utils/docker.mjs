@@ -65,6 +65,8 @@ export async function run(config) {
     "run",
     "-p",
     "3000:3000",
+    "--name",
+    config.projectName,
     `${config.projectName}:${config.projectVersion}`,
   ]);
 }

@@ -1,7 +1,6 @@
-import { getAlmaNoraConfig, getPackageJson } from "./utils/files.mjs";
+import { getAnoraConfig, getPackageJson } from "./utils/files.mjs";
 import process from "process";
 import * as nextjs from "./utils/nextjs.mjs";
-import almanoraConfig from "../tests/manual/nextjs/almanora.config.mjs";
 
 /**
  * @typedef {object} Config
@@ -18,9 +17,9 @@ export const Config = {};
  * @returns {Promise<string|undefined>} Framework found, if any
  */
 async function getFramework() {
-  const almaNoraConfig = await getAlmaNoraConfig();
-  if (almaNoraConfig.framework) {
-    return almaNoraConfig.framework;
+  const anoraConfig = await getAnoraConfig();
+  if (anoraConfig.framework) {
+    return anoraConfig.framework;
   }
 
   if (await nextjs.isDependency()) {
@@ -35,9 +34,9 @@ async function getFramework() {
  * @returns {Promise<string|undefined>} Package name, if any
  */
 async function getProjectName() {
-  const almaNoraConfig = await getAlmaNoraConfig();
+  const anoraConfig = await getAnoraConfig();
   const packageJson = await getPackageJson();
-  return almaNoraConfig.projectName || packageJson.name;
+  return anoraConfig.projectName || packageJson.name;
 }
 
 /**
@@ -45,9 +44,9 @@ async function getProjectName() {
  * @returns {Promise<string|undefined>} Project version, if any
  */
 async function getProjectVersion() {
-  const almaNoraConfig = await getAlmaNoraConfig();
+  const anoraConfig = await getAnoraConfig();
   const packageJson = await getPackageJson();
-  return almaNoraConfig.projectVersion || packageJson.version;
+  return anoraConfig.projectVersion || packageJson.version;
 }
 
 /**
@@ -55,8 +54,8 @@ async function getProjectVersion() {
  * @returns {Promise<string>} Node version
  */
 async function getNodeVersion() {
-  const almaNoraConfig = await getAlmaNoraConfig();
-  return almaNoraConfig.nodeVersion || process.versions.node;
+  const anoraConfig = await getAnoraConfig();
+  return anoraConfig.nodeVersion || process.versions.node;
 }
 
 /**
@@ -72,8 +71,8 @@ async function getNodeMajorVersion() {
  * @returns {Promise<boolean>} Should we update Dockerfile on run?
  */
 async function getUpdateDockerfileOnRun() {
-  const almaNoraConfig = await getAlmaNoraConfig();
-  if (!almaNoraConfig.updateDockerfileOnRun) {
+  const anoraConfig = await getAnoraConfig();
+  if (anoraConfig.updateDockerfileOnRun === false) {
     return false;
   }
   return true;
@@ -85,12 +84,12 @@ async function getUpdateDockerfileOnRun() {
  */
 function assertConfigSupported(config) {
   if (config.framework !== "nextjs") {
-    throw new Error("almanora currently only supports Next.js");
+    throw new Error("Anora currently only supports Next.js");
   }
 
   if (config.framework === "nextjs" && !nextjs.isOutputStandalone()) {
     throw new Error(
-      "almanora only works for 'standalone' output mode. For an example of how to configure this see https://github.com/vercel/next.js/blob/canary/examples/with-docker/next.config.js"
+      "Anora only works with standalone output mode. This can be configure in next.config.js. See https://github.com/vercel/next.js/blob/canary/examples/with-docker/next.config.js"
     );
   }
 }
@@ -109,7 +108,7 @@ export async function getConfig() {
   const updateDockerfileOnRun = await getUpdateDockerfileOnRun();
 
   const config = {
-    projectName: projectName || "default-almanora-runner",
+    projectName: projectName || "anora-runner",
     projectVersion: projectVersion || "0.0.1",
     nodeVersion: nodeMajorVersion,
     framework,

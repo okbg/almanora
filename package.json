@@ -1,5 +1,5 @@
 {
-  "name": "almanora",
+  "name": "anora",
   "version": "0.0.1",
   "description": "Docker tools for Node.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okbg/almanora.git"
+    "url": "git+https://github.com/okbg/anora.git"
   },
   "keywords": [
     "node",
@@ -28,9 +28,9 @@
   "author": "Olof Kihlberg <kihlberg.olof@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okbg/almanora/issues"
+    "url": "https://github.com/okbg/anora/issues"
   },
-  "homepage": "https://github.com/okbg/almanora#readme",
+  "homepage": "https://github.com/okbg/anora#readme",
   "devDependencies": {
     "@eslint/js": "9.2.0",
     "eslint": "9.2.0",

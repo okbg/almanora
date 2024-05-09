@@ -39,18 +39,17 @@ export async function getNextConfig() {
 
 /**
  * @async
- * @returns {Promise<Config|undefined>} almanora.config.js as an object
+ * @returns {Promise<Config|undefined>} anora.config.js as an object
  */
-export async function getAlmaNoraConfig() {
-  let module;
+export async function getAnoraConfig() {
   try {
-    module = await import(path.join(process.cwd(), "almanora.config.mjs"));
+    const module = await import(path.join(process.cwd(), "anora.config.mjs"));
+    return module && module.default ? module.default : {};
   } catch (e) {
     if (e.code === "ERR_MODULE_NOT_FOUND") {
-      // No config file found
+      return {};
     } else {
       throw e;
     }
   }
-  return module.default || {};
 }
