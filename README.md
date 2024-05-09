@@ -2,6 +2,16 @@
 
 Docker made easy
 
+## Supported environments
+
+### Node
+
+- [x] 22.1.0
+
+### Frameworks
+
+- [x] Next.js v14
+
 ## Running
 
 ```sh
@@ -10,7 +20,7 @@ npx almanora run
 
 ### Config
 
-Config should be located at `almanora.config.mjs`
+Should be located at `almanora.config.mjs`
 
 ```js
 import { Config } from "almanora/config.mjs";
@@ -24,14 +34,6 @@ export default {
   updateDockerfileOnRun: true,  // By default true
 };
 ```
-
-## Supported frameworks
-
-- [x] Next.js v14
-
-## Supported node versions
-
-- [x] 22.1.0
 
 ## Roadmap
 
