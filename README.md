@@ -4,15 +4,13 @@ Docker tools for Node.js that simplifies generating Dockerfiles, building images
 
 ## Supported frameworks
 
-- [x] Next.js v14, with [output mode set to "standalone"](https://github.com/vercel/next.js/blob/canary/examples/with-docker/next.config.js)
+- [x] Next.js, with [output mode set to "standalone"](https://github.com/vercel/next.js/blob/canary/examples/with-docker/next.config.js)
 
 ## Roadmap
 
 - [ ] Add support for express
-- [ ] Add support for reverse proxying using nginx
 - [ ] Add support for Remix
-- [ ] Add support for Next v12
-- [ ] Add support for Next v13
+- [ ] Add support for reverse proxying using nginx
 - [ ] Publish npm package
 
 ## Usage
@@ -36,7 +34,7 @@ import { Config } from "node-docker-tools";
 
 /** @type {Config} */
 export default {
-  nodeVersion: "22.1.0",
+  imageName: "myapp",
   framework: "nextjs",
 };
 ```
