@@ -21,7 +21,7 @@ async function updateDockerfile(config) {
  * @returns {Promise<void>} Resolves after child process has exited successfully
  */
 function spawnDocker(args) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const child = spawn("docker", args);
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
