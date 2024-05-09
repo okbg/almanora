@@ -1,0 +1,42 @@
+{
+  "name": "node-docker-tools",
+  "version": "0.0.1",
+  "description": "Docker tools for Node.js",
+  "type": "module",
+  "files": [
+    "src",
+    "templates"
+  ],
+  "bin": {
+    "generate": "./src/npx/generate.mjs",
+    "build": "./src/npx/build.mjs",
+    "run": "./src/npx/run.mjs"
+  },
+  "scripts": {
+    "lint": "eslint",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okbg/node-docker-tools.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "docker"
+  ],
+  "author": "Olof Kihlberg <kihlberg.olof@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okbg/node-docker-tools/issues"
+  },
+  "homepage": "https://github.com/okbg/node-docker-tools#readme",
+  "devDependencies": {
+    "@eslint/js": "9.2.0",
+    "eslint": "9.2.0",
+    "eslint-plugin-jsdoc": "48.2.3"
+  },
+  "dependencies": {
+    "mustache": "4.2.0"
+  }
+}
