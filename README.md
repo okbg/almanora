@@ -17,11 +17,11 @@ import { Config } from "almanora/config.mjs";
 
 /** @type {Config} */
 export default {
-  projectName: "myapp",
-  projectVersion: "1.2.3",
-  framework: "nextjs",
-  nodeVersion: "21",
-  updateDockerfileOnRun: true,
+  projectName: "myapp",         // By default derived from package.json
+  projectVersion: "1.2.3",      // By default derived from package.json
+  framework: "nextjs",          // By default derived from package.json
+  nodeVersion: "21",            // By default derived from node -v
+  updateDockerfileOnRun: true,  // By default true
 };
 ```
 
@@ -35,9 +35,9 @@ export default {
 
 ## Roadmap
 
+- [ ] Add support for reverse proxying using nginx
 - [ ] Add support for express
 - [ ] Add support for Remix
-- [ ] Add support for reverse proxying using nginx
 - [ ] Publish npm package
 
 ## Contribute
