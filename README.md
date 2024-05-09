@@ -66,9 +66,7 @@ npm run test
 
 #### Manual
 
-For ease of testing different frameworks and configurations end-to-end you'll find some example projects under [tests/manual] that you can play around with.
-
-To test a local version of an npx scripts within the context of an example app you can just execute it with node like:
+Example projects useful for testing things manually can be found under [/tests/manual](tests/manual/)
 
 ```sh
 cd tests/manual/nextjs
