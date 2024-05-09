@@ -10,9 +10,9 @@ import { fileURLToPath } from "url";
  * @returns {Promise<string>} Output of the rendering
  */
 export async function renderTemplate(name, context) {
-  const url = fileURLToPath(import.meta.url);
+  const filePath = fileURLToPath(import.meta.url);
   const templatePath = path.join(
-    path.dirname(url),
+    path.dirname(filePath),
     "..",
     "..",
     "templates",

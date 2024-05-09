@@ -10,7 +10,6 @@ if (!config.imageName) {
   throw new Error("Missing imageName in config");
 }
 
-// TODO: Add support for --env-file?
 const child = spawn("docker", [
   "run",
   "-p",
