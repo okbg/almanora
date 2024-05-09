@@ -41,7 +41,7 @@ export default {
 
 ## Contribute
 
-Out door is always open for pull requests
+Door is always open for pull requests
 
 ### Linting
 
