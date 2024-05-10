@@ -18,10 +18,10 @@ import { Config } from "node-docker-tools/config.mjs";
 
 /** @type {Config} */
 export default {
-  projectName: "myapp",         // By default derived from package.json
-  projectVersion: "1.2.3",      // By default derived from package.json
-  framework: "nextjs",          // By default derived from package.json
-  nodeVersion: "21",            // By default derived from node -v
+  projectName: "myapp",             // Default derived from package.json
+  projectVersion: "1.2.3",          // Default derived from package.json
+  framework: "nextjs",              // Default derived from package.json
+  nodeVersion: "21",                // Default derived from node -v
 };
 ```
 
