@@ -8,12 +8,9 @@ import { renderDockerfile } from "./templating.mjs";
 /**
  * @async
  * @param {Config} config Config to use
- * @returns {Promise<void>} Resolves when dockerfile has been successfully updated
+ * @returns {Promise<void>} Resolves after Dockerfile has been successfully updated
  */
 export async function updateDockerfile(config) {
-  if (!config.updateDockerfileOnRun) {
-    return;
-  }
   const dockerfile = await renderDockerfile(config);
   const outputPath = path.join(process.cwd(), "Dockerfile");
   await writeFile(outputPath, dockerfile, { encoding: "utf-8" });

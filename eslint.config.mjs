@@ -2,13 +2,6 @@ import globals from "globals";
 import pluginJs from "@eslint/js";
 import jsdoc from "eslint-plugin-jsdoc";
 
-// "rules": {
-//   "jsdoc/no-undefined-types": 1
-// },
-// "plugins": [
-//   "jsdoc"
-// ]
-
 export default [
   { ignores: ["examples/*"] },
   pluginJs.configs.recommended,

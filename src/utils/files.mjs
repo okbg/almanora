@@ -39,11 +39,13 @@ export async function getNextConfig() {
 
 /**
  * @async
- * @returns {Promise<Config|undefined>} anora.config.js as an object
+ * @returns {Promise<Config|undefined>} node-docker-tools.config.js as an object
  */
-export async function getAnoraConfig() {
+export async function getNodeDockerToolsConfig() {
   try {
-    const module = await import(path.join(process.cwd(), "anora.config.mjs"));
+    const module = await import(
+      path.join(process.cwd(), "node-docker-tools.config.mjs")
+    );
     return module && module.default ? module.default : {};
   } catch (e) {
     if (e.code === "ERR_MODULE_NOT_FOUND") {

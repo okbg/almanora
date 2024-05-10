@@ -1,5 +1,5 @@
 #
-# NB: This file is managed by Anora
+# NB: This file is managed by node-docker-tools
 #
 
 FROM node:{{nodeVersion}}-alpine AS base
@@ -11,7 +11,7 @@ FROM node:{{nodeVersion}}-alpine AS base
 FROM base AS deps
 
 RUN apk update
-RUN apk add --no-cache libc6-compat supervisor openssh nginx
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
@@ -70,7 +70,5 @@ USER nextjs
 ENV PORT 3000
 
 EXPOSE 3000
-
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 CMD HOSTNAME="0.0.0.0" node server.js
