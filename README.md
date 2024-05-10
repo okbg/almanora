@@ -44,8 +44,7 @@ These tools are tested with:
 - [ ] Add support for build args
 - [ ] Add support for express
 - [ ] Add support for Remix
-- [ ] Add support for deploying
-- [ ] Publish npm package
+- [ ] Add support for pushing to a registry
 
 ## Contribute
 
@@ -77,3 +76,7 @@ To execute a local npx script within the context of an example app just go to th
 cd examples/nexts
 node ../../src/npx/generate.mjs
 ```
+
+## Publish a new version
+
+To publish a new version to `npm` update the version in `package.json` and then run `npm publish`
