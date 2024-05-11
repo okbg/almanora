@@ -5,7 +5,7 @@ Docker made easy
 ## Commands
 
 ```sh
-npx node-docker-tools generate      # Generate a Dockerfile tailored for your app
+npx node-docker-tools generate      # Generate a Dockerfile based on package.json
 npx node-docker-tools build         # Build the image
 npx node-docker-tools run           # Build the image and run the container
 ```
@@ -23,7 +23,7 @@ export default {
   projectVersion: "1.2.3",          // Default derived from package.json
   framework: "nextjs",              // Default derived from package.json
   nodeVersion: "21",                // Default derived from node -v
-  envFile: ".dotenv.local"          // Default .env.local or .env if any exists
+  envFile: ".dotenv.local"          // Default .env.local or .env present
 };
 ```
 
@@ -74,7 +74,7 @@ Example projects using different frameworks can be found under [/examples](examp
 To execute a local npx script within the context of an example app just go to the project dir and run the script from there. Moving to the root project dir is important as the scripts often assume `cwd` contains config files like `package.json`.
 
 ```sh
-cd examples/nexts
+cd examples/nextjs
 npx ../../src/npx/generate.mjs
 ```
 
