@@ -6,12 +6,13 @@ Docker made easy
 
 ```sh
 npx node-docker-tools generate      # Generate a Dockerfile tailored for your app
-npx node-docker-tools run           # Run the container locally
+npx node-docker-tools build         # Build the image
+npx node-docker-tools run           # Build the image and run the container
 ```
 
 ## Config
 
-node-docker-tools requires no config file as it derives the configuration from your `package.json`. It is possibe to override configs though by placing a `node-docker-tools.config.mjs` file in the root of your project:
+Config should reside in the root of your project and be named `node-docker-tools.config.mjs`. A configuration file is often not needed though as node-docker-tools by default derives configuration from your environment.
 
 ```js
 import { Config } from "node-docker-tools/config.mjs";
@@ -70,11 +71,11 @@ npm run test
 
 Example projects using different frameworks can be found under [/examples](examples/) and is an easy way of playing around with node-docker-tools in different contexts.
 
-To execute a local npx script within the context of an example app just go to the project dir and run the script. Moving to the root project dir is important as the scripts often assume `cwd` contains config files like `package.json`.
+To execute a local npx script within the context of an example app just go to the project dir and run the script from there. Moving to the root project dir is important as the scripts often assume `cwd` contains config files like `package.json`.
 
 ```sh
 cd examples/nexts
-node ../../src/npx/generate.mjs
+npx ../../src/npx/generate.mjs
 ```
 
 ## Publish a new version
