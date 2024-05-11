@@ -46,7 +46,7 @@ function spawnDocker(args, pipeStdOut = true) {
  * @param {Config} config Config to use
  * @returns {Promise<object>} Resolves with object, or null if not found
  */
-function inspect(config) {
+export function inspect(config) {
   return new Promise((resolve) => {
     let output = "";
     const child = spawn("docker", ["inspect", config.name]);
