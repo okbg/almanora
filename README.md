@@ -23,6 +23,7 @@ export default {
   projectVersion: "1.2.3",          // Default derived from package.json
   framework: "nextjs",              // Default derived from package.json
   nodeVersion: "21",                // Default derived from node -v
+  envFile: ".dotenv.local"          // Default .env.local or .env if any exists
 };
 ```
 
@@ -41,9 +42,8 @@ These tools are tested with:
 ## Roadmap
 
 - [ ] Add support for reverse proxying using nginx
-- [ ] Add support for environment variables using dotenv
 - [ ] Add support for build args
-- [ ] Add support for express
+- [ ] Add support for Express
 - [ ] Add support for Remix
 - [ ] Add support for pushing to a registry
 

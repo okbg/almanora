@@ -39,7 +39,7 @@ export async function getNextConfig() {
 
 /**
  * @async
- * @returns {Promise<Config|undefined>} node-docker-tools.config.js as an object
+ * @returns {Promise<Config>} node-docker-tools.config.js as an object
  */
 export async function getNodeDockerToolsConfig() {
   try {

@@ -25,7 +25,7 @@ export async function updateDockerfile(config) {
  */
 function spawnDocker(args, pipeStdOut = true) {
   return new Promise((resolve, reject) => {
-    info(args.join(" "));
+    info(`docker ${args.join(" ")}`);
     const child = spawn("docker", args);
     if (pipeStdOut) {
       child.stdout.pipe(process.stdout);
@@ -89,13 +89,18 @@ export async function run(config) {
   const name = config.projectName;
   const version = config.projectVersion;
 
-  await spawnDocker([
-    "run",
-    "--rm",
-    "-p",
-    "3000:3000", // TODO: Make configurable
-    "--name",
-    name,
-    `${name}:${version}`,
-  ]);
+  const args = [];
+  args.push("run");
+  args.push("--rm");
+  args.push("-p");
+  args.push("3000:3000");
+  if (config.envFile) {
+    args.push("--env-file");
+    args.push(config.envFile);
+  }
+  args.push("--name");
+  args.push(name);
+  args.push(`${name}:${version}`);
+
+  await spawnDocker(args);
 }

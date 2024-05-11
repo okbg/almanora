@@ -1,6 +1,8 @@
-import { getNodeDockerToolsConfig, getPackageJson } from "./utils/files.mjs";
 import process from "process";
+import path from "path";
+import { getNodeDockerToolsConfig, getPackageJson } from "./utils/files.mjs";
 import * as nextjs from "./utils/nextjs.mjs";
+import { existsSync } from "fs";
 
 /**
  * @typedef {object} Config
@@ -8,6 +10,7 @@ import * as nextjs from "./utils/nextjs.mjs";
  * @property {string} projectVersion Project version
  * @property {string} nodeVersion Node version
  * @property {"nextjs"} framework Framework used
+ * @property {string=} envFile Env file to use, if any
  */
 export const Config = {};
 
@@ -66,6 +69,32 @@ async function getNodeMajorVersion() {
 }
 
 /**
+ * @async
+ * @returns {Promise<string|null>} The env file, if any
+ */
+async function getEnvFile() {
+  const { envFile } = await getNodeDockerToolsConfig();
+  if (envFile) {
+    if (envFile.startsWith("/")) {
+      return envFile;
+    }
+    return path.join(process.cwd(), envFile);
+  }
+
+  const dotEnvLocal = path.join(process.cwd(), ".env.local");
+  if (existsSync(dotEnvLocal)) {
+    return dotEnvLocal;
+  }
+
+  const dotEnv = path.join(process.cwd(), ".env");
+  if (existsSync(dotEnv)) {
+    return dotEnv;
+  }
+
+  return null;
+}
+
+/**
  *
  * @param {Config} config Config to use
  */
@@ -92,12 +121,14 @@ export async function getConfig() {
   const projectVersion = await getProjectVersion();
   const nodeMajorVersion = await getNodeMajorVersion();
   const framework = await getFramework();
+  const envFile = await getEnvFile();
 
   const config = {
     projectName: projectName || "node-docker-tools-runner",
     projectVersion: projectVersion || "0.0.1",
     nodeVersion: nodeMajorVersion,
     framework,
+    envFile,
   };
 
   assertConfigSupported(config);
