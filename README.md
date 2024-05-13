@@ -1,5 +1,7 @@
 # node-docker-tools
 
+!!! WORK IN PROGRESS !!!
+
 Docker made easy
 
 ## Commands
@@ -26,27 +28,6 @@ module.exports = {
   envFile: ".dotenv.local"          // Default .env.local or .env present
 };
 ```
-
-## Compatibility
-
-These tools are tested with:
-
-### Node
-
-- [x] 22.1.0
-
-### Frameworks
-
-- [x] Next.js v14
-
-## Roadmap
-
-- [ ] Explicitly pass framework as arg to generate command, and rename dockerfile
-- [ ] Add support for reverse proxying using nginx
-- [ ] Add support for build args
-- [ ] Add support for Express
-- [ ] Add support for Remix
-- [ ] Add support for pushing to a registry
 
 ## Contribute
 
