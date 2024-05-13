@@ -1,4 +1,3 @@
-const path = require("path");
 const { readFile } = require("fs/promises");
 
 /**
@@ -6,11 +5,7 @@ const { readFile } = require("fs/promises");
  * @returns {Promise<object>} package.json as an object
  */
 async function getPackageJson() {
-  return JSON.parse(
-    await readFile(path.join(process.cwd(), "package.json"), {
-      encoding: "utf-8",
-    })
-  );
+  return JSON.parse(await readFile("./package.json", { encoding: "utf-8" }));
 }
 
 /**
@@ -20,7 +15,7 @@ async function getPackageJson() {
 async function getNextConfig() {
   let module;
   try {
-    module = await import(path.join(process.cwd(), "next.config.js"));
+    module = await import("./next.config.js");
   } catch (e) {
     if (e.code === "ENOTFOUND") {
       // No config file found
@@ -42,9 +37,7 @@ async function getNextConfig() {
  */
 async function getNodeDockerToolsConfig() {
   try {
-    const module = await import(
-      path.join(process.cwd(), "node-docker-tools.config")
-    );
+    const module = await import("./node-docker-tools.config");
     return module && module.default ? module.default : {};
   } catch (e) {
     if (e.code === "ERR_MODULE_NOT_FOUND") {

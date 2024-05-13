@@ -14,5 +14,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "node-docker-tools": "^0.0.6"
   }
 }
