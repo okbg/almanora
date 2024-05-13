@@ -1,6 +1,6 @@
 {
   "name": "node-docker-tools",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Docker tools for Node.js",
   "type": "commonjs",
   "files": [
