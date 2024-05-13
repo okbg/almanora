@@ -1,8 +1,8 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import jsdoc from "eslint-plugin-jsdoc";
+const globals = require("globals");
+const pluginJs = require("@eslint/js");
+const jsdoc = require("eslint-plugin-jsdoc");
 
-export default [
+module.exports = [
   { ignores: ["examples/*"] },
   pluginJs.configs.recommended,
   jsdoc.configs["flat/recommended"],

@@ -1,12 +1,11 @@
-import path from "path";
-import { readFile } from "fs/promises";
-import { Config } from "../config.mjs";
+const path = require("path");
+const { readFile } = require("fs/promises");
 
 /**
  * @async
  * @returns {Promise<object>} package.json as an object
  */
-export async function getPackageJson() {
+async function getPackageJson() {
   return JSON.parse(
     await readFile(path.join(process.cwd(), "package.json"), {
       encoding: "utf-8",
@@ -18,7 +17,7 @@ export async function getPackageJson() {
  * @async
  * @returns {Promise<object|undefined>} next.config.js as an object
  */
-export async function getNextConfig() {
+async function getNextConfig() {
   let module;
   try {
     module = await import(path.join(process.cwd(), "next.config.js"));
@@ -39,12 +38,12 @@ export async function getNextConfig() {
 
 /**
  * @async
- * @returns {Promise<Config>} node-docker-tools.config.js as an object
+ * @returns {Promise<object>} node-docker-tools config as an object
  */
-export async function getNodeDockerToolsConfig() {
+async function getNodeDockerToolsConfig() {
   try {
     const module = await import(
-      path.join(process.cwd(), "node-docker-tools.config.mjs")
+      path.join(process.cwd(), "node-docker-tools.config")
     );
     return module && module.default ? module.default : {};
   } catch (e) {
@@ -55,3 +54,5 @@ export async function getNodeDockerToolsConfig() {
     }
   }
 }
+
+module.exports = { getPackageJson, getNextConfig, getNodeDockerToolsConfig };

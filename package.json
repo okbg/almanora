@@ -1,16 +1,16 @@
 {
   "name": "node-docker-tools",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Docker tools for Node.js",
-  "type": "module",
+  "type": "commonjs",
   "files": [
     "src",
     "templates"
   ],
   "bin": {
-    "generate": "./src/npx/generate.mjs",
-    "build": "./src/npx/build.mjs",
-    "run": "./src/npx/run.mjs"
+    "generate": "./src/npx/generate.js",
+    "build": "./src/npx/build.js",
+    "run": "./src/npx/run.js"
   },
   "scripts": {
     "lint": "eslint --max-warnings=0",

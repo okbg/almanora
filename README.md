@@ -5,20 +5,20 @@ Docker made easy
 ## Commands
 
 ```sh
-npx node-docker-tools generate      # Generate a Dockerfile based on package.json
-npx node-docker-tools build         # Build the image
-npx node-docker-tools run           # Build the image and run the container
+npm exec node-docker-tools generate      # Generate a Dockerfile based on package.json
+npm exec node-docker-tools build         # Build the image
+npm exec node-docker-tools run           # Build the image and then run the container
 ```
 
 ## Config
 
-Config should reside in the root of your project and be named `node-docker-tools.config.mjs`. A configuration file is often not needed though as node-docker-tools by default derives configuration from your environment.
+Config should reside in the root of your project and be named `node-docker-tools.config.js`. A configuration file is often not needed though as node-docker-tools by default derives configuration from your environment.
 
 ```js
-import { Config } from "node-docker-tools/config.mjs";
+const { Config } = require("node-docker-tools/config");
 
 /** @type {Config} */
-export default {
+module.exports = {
   projectName: "myapp",             // Default derived from package.json
   projectVersion: "1.2.3",          // Default derived from package.json
   framework: "nextjs",              // Default derived from package.json
@@ -41,6 +41,7 @@ These tools are tested with:
 
 ## Roadmap
 
+- [ ] Explicitly pass framework as arg to generate command, and rename dockerfile
 - [ ] Add support for reverse proxying using nginx
 - [ ] Add support for build args
 - [ ] Add support for Express
@@ -75,7 +76,7 @@ To execute a local npx script within the context of an example app just go to th
 
 ```sh
 cd examples/nextjs
-npx ../../src/npx/generate.mjs
+npx ../../src/npx/generate.js
 ```
 
 ## Publish a new version

@@ -1,4 +1,4 @@
-import { argv } from "process";
+const { argv } = require("process");
 
 /**
  * Assumes args are passed like --name value
@@ -6,7 +6,7 @@ import { argv } from "process";
  * @param {string} defaultValue Default value if not found
  * @returns {string} The value
  */
-export function argOrDefault(name, defaultValue) {
+function argOrDefault(name, defaultValue) {
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === name) {
       return argv[i + 1] || defaultValue;
@@ -14,3 +14,5 @@ export function argOrDefault(name, defaultValue) {
   }
   return defaultValue;
 }
+
+module.exports = { argOrDefault };

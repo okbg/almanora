@@ -1,12 +1,12 @@
-import path from "path";
-import process from "process";
-import { getPackageJson } from "./files.mjs";
+const path = require("path");
+const process = require("process");
+const { getPackageJson } = require("./files");
 
 /**
  * @async
  * @returns {Promise<boolean>} True if dependency on nextjs is found
  */
-export async function isDependency() {
+async function isDependency() {
   const packageJson = await getPackageJson();
   return packageJson.dependencies.next !== undefined;
 }
@@ -15,7 +15,7 @@ export async function isDependency() {
  * @async
  * @returns {Promise<boolean>} True if output=standalone in next.config.js
  */
-export async function isOutputStandalone() {
+async function isOutputStandalone() {
   let module;
   try {
     module = await import(path.join(process.cwd(), "next.config.js"));
@@ -29,3 +29,5 @@ export async function isOutputStandalone() {
 
   return JSON.stringify(module.default).output === "standalone";
 }
+
+module.exports = { isDependency, isOutputStandalone };

@@ -1,8 +1,8 @@
-import process from "process";
-import path from "path";
-import { getNodeDockerToolsConfig, getPackageJson } from "./utils/files.mjs";
-import * as nextjs from "./utils/nextjs.mjs";
-import { existsSync } from "fs";
+const process = require("process");
+const path = require("path");
+const { getNodeDockerToolsConfig, getPackageJson } = require("./utils/files");
+const nextjs = require("./utils/nextjs");
+const { existsSync } = require("fs");
 
 /**
  * @typedef {object} Config
@@ -12,7 +12,7 @@ import { existsSync } from "fs";
  * @property {"nextjs"} framework Framework used
  * @property {string=} envFile Env file to use, if any
  */
-export const Config = {};
+const Config = {};
 
 /**
  * @async
@@ -116,7 +116,7 @@ function assertConfigSupported(config) {
  * @async
  * @returns {Promise<Config>} The resolved config
  */
-export async function getConfig() {
+async function getConfig() {
   const projectName = await getProjectName();
   const projectVersion = await getProjectVersion();
   const nodeMajorVersion = await getNodeMajorVersion();
@@ -135,3 +135,5 @@ export async function getConfig() {
 
   return config;
 }
+
+module.exports = { Config, getConfig };

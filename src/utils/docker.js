@@ -1,17 +1,17 @@
-import path from "path";
-import process from "process";
-import { writeFile } from "fs/promises";
-import { spawn } from "child_process";
-import { Config } from "../config.mjs";
-import { renderDockerfile } from "./templating.mjs";
-import { info } from "./logging.mjs";
+const path = require("path");
+const process = require("process");
+const { writeFile } = require("fs/promises");
+const { spawn } = require("child_process");
+const { Config } = require("../config");
+const { renderDockerfile } = require("./templating");
+const { info } = require("./logging");
 
 /**
  * @async
  * @param {Config} config Config to use
  * @returns {Promise<void>} Resolves after Dockerfile has been successfully updated
  */
-export async function updateDockerfile(config) {
+async function updateDockerfile(config) {
   const dockerfile = await renderDockerfile(config);
   const outputPath = path.join(process.cwd(), "Dockerfile");
   await writeFile(outputPath, dockerfile, { encoding: "utf-8" });
@@ -46,7 +46,7 @@ function spawnDocker(args, pipeStdOut = true) {
  * @param {Config} config Config to use
  * @returns {Promise<object>} Resolves with object, or null if not found
  */
-export function inspect(config) {
+function inspect(config) {
   return new Promise((resolve) => {
     let output = "";
     const child = spawn("docker", ["inspect", config.name]);
@@ -69,7 +69,7 @@ export function inspect(config) {
  * @param {Config} config Config to use
  * @returns {Promise<void>} Resolved on build succeed
  */
-export async function build(config) {
+async function build(config) {
   await spawnDocker([
     "build",
     "-t",
@@ -85,7 +85,7 @@ export async function build(config) {
  * @param {Config} config Config to use
  * @returns {Promise<void>} Resolved when container is stopped
  */
-export async function run(config) {
+async function run(config) {
   const name = config.projectName;
   const version = config.projectVersion;
 
@@ -104,3 +104,5 @@ export async function run(config) {
 
   await spawnDocker(args);
 }
+
+module.exports = { updateDockerfile, inspect, build, run };

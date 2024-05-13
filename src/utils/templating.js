@@ -1,8 +1,7 @@
-import path from "path";
-import mustache from "mustache";
-import { readFile } from "fs/promises";
-import { fileURLToPath } from "url";
-import { Config } from "../config.mjs";
+const path = require("path");
+const mustache = require("mustache");
+const { readFile } = require("fs/promises");
+const { Config } = require("../config");
 
 /**
  * @async
@@ -10,15 +9,8 @@ import { Config } from "../config.mjs";
  * @param {object} context Rendering context to pass to template
  * @returns {Promise<string>} Output of the rendering
  */
-export async function renderTemplate(name, context) {
-  const filePath = fileURLToPath(import.meta.url);
-  const templatePath = path.join(
-    path.dirname(filePath),
-    "..",
-    "..",
-    "templates",
-    name
-  );
+async function renderTemplate(name, context) {
+  const templatePath = path.join(__dirname, "..", "..", "templates", name);
   const template = await readFile(templatePath, { encoding: "utf-8" });
   return mustache.render(template, context);
 }
@@ -28,7 +20,7 @@ export async function renderTemplate(name, context) {
  * @param {Config} config Config to use
  * @returns {Promise<string>} The rendered Dockerfile
  */
-export async function renderDockerfile(config) {
+async function renderDockerfile(config) {
   switch (config.framework) {
     case "nextjs": {
       return await renderTemplate("Dockerfile.nextjs.mustache", config);
@@ -40,3 +32,5 @@ export async function renderDockerfile(config) {
     }
   }
 }
+
+module.exports = { renderTemplate, renderDockerfile };
